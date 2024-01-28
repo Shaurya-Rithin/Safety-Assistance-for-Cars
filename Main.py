@@ -4,6 +4,7 @@ import numpy as np
 import pyttsx3
 import pygame
 
+#pygame start
 pygame.init()
 
 surface = pygame.display.set_mode((700, 600))
@@ -13,6 +14,7 @@ color = (255, 255, 255)
 surface.fill(color)
 pygame.display.flip()
 
+#images for the pygame
 imp = pygame.image.load("road.png").convert()
 car = pygame.image.load("car.png").convert()
 car = pygame.transform.scale(car, (200, 100))
@@ -30,9 +32,11 @@ def talk(text):
     print(text)
     engine.runAndWait()
 
+#loads modals
 model = load_model("keras_Model.h5", compile=False)
 class_names = open("labels.txt", "r").readlines()
 
+#camera
 camera = cv2.VideoCapture(0)
 
 while True:
@@ -42,7 +46,7 @@ while True:
 
     image = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)
 
-    #cv2.imshow("Webcam Image", image)
+    cv2.imshow("Webcam Image", image)
 
     image = np.asarray(image, dtype=np.float32).reshape(1, 224, 224, 3)
 
@@ -53,7 +57,8 @@ while True:
     class_name = class_names[index]
     confidence_score = prediction[0][index]
     class_name = class_names[index].strip() 
-   
+
+    #buncha classes detection
     if class_name == "3 walls":
         surface.blit(br, (500,150))
         talk("wall")
