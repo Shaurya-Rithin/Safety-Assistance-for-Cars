@@ -1,0 +1,4 @@
+0 Empty Road you can go
+1 Speed Bump slow down
+2 Pedestrian STOP
+3 walls 
